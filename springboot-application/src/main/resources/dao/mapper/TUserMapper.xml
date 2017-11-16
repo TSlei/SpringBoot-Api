@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="StatisticsModel">
+
+	<resultMap id="RichResultMap" class="com.ircloud.ydh.api.model.report.DataModel">
+		<result column="fname" property="name" jdbcType="VARCHAR" />
+		<result column="fassist" property="assist" jdbcType="VARCHAR" />
+		<result column="fmoney" property="money" jdbcType="DOUBLE"
+			nullValue="0" />
+		<result column="fcount" property="orderCount" jdbcType="INT"
+			nullValue="0" />
+		<result column="fcustomerCount" property="customerCount"
+			jdbcType="INT" nullValue="0" />
+		<result column="fnameId" property="nameId" jdbcType="BIGINT" />
+		<result column="ftypeId" property="typeId" jdbcType="BIGINT" />
+		<result column="ftypename" property="typeName" jdbcType="VARCHAR" />
+		<result column="fitemCount" property="itemCount" jdbcType="DOUBLE"
+			nullValue="0" />
+	</resultMap>
+
+	<select id="groupByOrderMoneyStatus" parameterClass="map"
+		resultMap="OrderStatusMoneyMap">
+		select ftype,sum(fmoney) ftotalMoney, count(*) ftotalCount
+		from t_order
+		where fdbid = #dbid# and fdelete='0'
+		<isNotNull property="customerId">
+			and fcustomerId = #customerId#
+		</isNotNull>
+		<isNotNull property="orderType">
+			and ftype = #orderType#
+		</isNotNull>
+		<isNotNull property="type">
+			and ftype = #type#
+		</isNotNull>
+		<![CDATA[ 
+	  AND faudit  >= STR_TO_DATE(#beginDate#,'%Y-%m-%d') 
+	  AND faudit  <= DATE_ADD(#endDate#,INTERVAL 1 DAY)
+	  ]]>
+		<isNotNull property="status">
+			<iterate prepend="and" property="status" conjunction="or"
+				open="(" close=")">
+				fstatus = #status[]#
+			</iterate>
+		</isNotNull>
+		<!-- group by fstatus -->
+	</select>
+
+</sqlMap>
