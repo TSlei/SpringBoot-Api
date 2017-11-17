@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.springboot.dao.BaseDao;
+import com.springboot.dao.sessionFactory.BaseDao;
 
 @Component
 public class BaseService<E, E_PK> {
