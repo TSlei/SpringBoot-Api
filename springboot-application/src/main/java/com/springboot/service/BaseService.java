@@ -12,18 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.springboot.dao.BaseDao;
 
 @Component
-public abstract class BaseService<E, E_PK> {
+public class BaseService<E, E_PK> {
 
 	@Autowired
-	protected abstract BaseDao<E, E_PK> getDao();
+	protected BaseDao<E, E_PK> dao;
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public E_PK save(final E entity) throws DataAccessException {
-		return getDao().save(entity);
+		return dao.save(entity);
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void save(final List<E> entity) throws DataAccessException {
+	public void saveList(final List<E> entity) throws DataAccessException {
 		List<E> insertList = new ArrayList<E>();
 		for (E e : entity) {
 			if (null != e) {
@@ -31,18 +31,13 @@ public abstract class BaseService<E, E_PK> {
 			}
 		}
 		if (!insertList.isEmpty()) {
-			getDao().insertBatchAndSetId("saveList",insertList);
+			dao.saveList(insertList);
 		}
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public int update(final E entity) throws DataAccessException {
-		return getDao().update(entity);
-	}
-
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public int updateData(final E entity) throws DataAccessException {
-		return getDao().updateData(entity);
+		return dao.update(entity);
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -55,7 +50,7 @@ public abstract class BaseService<E, E_PK> {
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public int delete(final E_PK id) throws DataAccessException {
-		return getDao().delete(id);
+		return dao.delete(id);
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -67,18 +62,18 @@ public abstract class BaseService<E, E_PK> {
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public int deletes(final List<E_PK> ids) throws DataAccessException {
-		return getDao().delete(ids);
+	public int deleteByIds(final List<E_PK> ids) throws DataAccessException {
+		return dao.deleteByIds(ids);
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public E get(final E_PK id) throws DataAccessException {
-		return getDao().get(id);
+		return dao.get(id);
 	}
 
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public List<E> query() throws DataAccessException {
-		return getDao().query("query");
+		return dao.query("query");
 	}
 
 }

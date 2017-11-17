@@ -3,15 +3,15 @@ package com.springboot;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@SpringBootApplication
-@ComponentScan
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@SpringBootApplication(scanBasePackages = {"com.springboot"})
+@EnableSwagger2
 public class Application implements CommandLineRunner {
 
-	
 	@RequestMapping("/") 
 	@ResponseBody
 	public String index() { 
