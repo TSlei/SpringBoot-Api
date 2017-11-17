@@ -1,6 +1,9 @@
-##ignore this file##
+﻿##ignore this file##
 /target/
 .classpath
+*.iml
+*.idea
+*.settings
 .project
 .settings
  ##filter databfile、sln file##

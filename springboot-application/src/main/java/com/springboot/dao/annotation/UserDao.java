@@ -1,4 +1,4 @@
-package com.springboot.dao;
+package com.springboot.dao.annotation;
 
 import java.util.Collection;
 import java.util.List;
