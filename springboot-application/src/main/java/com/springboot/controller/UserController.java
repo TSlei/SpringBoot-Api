@@ -44,7 +44,7 @@ public class UserController {
 	}
 	
 	@ApiOperation("查询用户")
-	@RequestMapping(value = "/query/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/query", method = RequestMethod.GET)
 	public String queryUser(@RequestParam("id") Long id) {
 		
 		UserModel userModel = userService.getById(id);
