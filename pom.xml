@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.springboot</groupId>
 	<artifactId>SpringBoot</artifactId>
@@ -10,9 +10,10 @@
 
 	<modules>
 		<module>springboot-application</module>
-		<module>springboot-common</module>
+		<module>springboot-mq</module>
 		<module>springboot-swagger</module>
-	</modules>
+    	<module>springboot-elasticsearch</module>
+  </modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
